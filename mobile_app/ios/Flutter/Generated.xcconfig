@@ -1,0 +1,17 @@
+// This is a generated config file for .xcconfig and will be overwritten by Flutter.
+// Edit the Flutter files, not this file.
+
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
+
+FLUTTER_ROOT=/Users/apple/development/flutter
+FLUTTER_APPLICATION_PATH=/Users/apple/Projects/widsurf/Interview_tracker/mobile_app
+COCOAPODS_PARALLEL_CODE_SIGN=true
+FLUTTER_TARGET=lib/main.dart
+FLUTTER_BUILD_DIR=build
+FLUTTER_BUILD_NAME=1.0.0
+FLUTTER_BUILD_NUMBER=1
+EXCLUDED_ARCHS[sdk=iphonesimulator*]=arm64
+DART_OBFUSCATION=false
+TRACK_WIDGET_CREATION=true
+TREE_SHAKE_ICONS=false
+PACKAGE_CONFIG=.dart_tool/package_config.json

@@ -1,0 +1,92 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ---------- Backend ----------
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+
+      - name: Build backend binary
+        working-directory: backend
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o interviewtracker -ldflags="-s -w" .
+
+      # ---------- Frontend ----------
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      # ---------- Mobile App (Flutter) ----------
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Get Flutter dependencies
+        working-directory: mobile_app
+        run: flutter pub get
+
+      - name: Build release APK
+        working-directory: mobile_app
+        run: flutter build apk --release
+
+      # ---------- Bundle & Release ----------
+      - name: Prepare release bundle
+        run: |
+          mkdir -p release/assets
+          # Backend binary
+          cp backend/interviewtracker release/interviewtracker
+          # Frontend static files
+          cp -r frontend/dist/* release/assets/
+          # Mobile APK
+          cp mobile_app/build/app/outputs/flutter-apk/app-release.apk release/app-release.apk
+
+      - name: Create zip archive
+        run: |
+          cd release
+          zip -r "../interview-tracker-${{ github.ref_name }}.zip" .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          files: interview-tracker-${{ github.ref_name }}.zip

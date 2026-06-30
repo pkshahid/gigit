@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bento-100 text-bento-800 dark:bg-bento-950 dark:text-bento-100 overflow-x-hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-bento-sm px-4 py-2.5 text-sm font-semibold transition-all duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-bento-900 text-white shadow-bento-sm hover:bg-bento-800 hover:shadow-bento-md dark:bg-bento-100 dark:text-bento-900 dark:hover:bg-white;
+  }
+  .btn-secondary {
+    @apply btn bg-white text-bento-600 border border-bento-200 shadow-bento-sm hover:border-bento-300 hover:shadow-bento-md dark:bg-bento-800 dark:text-bento-200 dark:border-bento-700 dark:hover:border-bento-600 dark:shadow-bento-dark;
+  }
+  .btn-danger {
+    @apply btn bg-red-500 text-white shadow-bento-sm hover:bg-red-600 hover:shadow-bento-md dark:bg-red-600 dark:hover:bg-red-700;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .card {
+    @apply rounded-bento border border-bento-200 bg-white p-5 shadow-bento dark:border-bento-800 dark:bg-bento-900 dark:shadow-bento-dark;
+  }
+  .card-sm {
+    @apply rounded-bento-sm border border-bento-200 bg-white p-4 shadow-bento-sm dark:border-bento-800 dark:bg-bento-900 dark:shadow-bento-dark;
+  }
+  .input {
+    @apply w-full rounded-bento-sm border border-bento-200 bg-white px-3.5 py-2.5 text-sm text-bento-800 placeholder-bento-400 shadow-bento-sm focus:border-bento-400 focus:outline-none focus:ring-2 focus:ring-bento-300/50 dark:border-bento-700 dark:bg-bento-800 dark:text-bento-100 dark:placeholder-bento-500;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-bento-600 dark:text-bento-300;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+}
