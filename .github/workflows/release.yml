@@ -55,16 +55,12 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: '3.24.5'
           cache: true
 
       - name: Get Flutter dependencies
         working-directory: mobile_app
         run: flutter pub get
-
-      - name: Regenerate Android platform files
-        working-directory: mobile_app
-        run: flutter create --platforms=android .
 
       - name: Build release APK
         working-directory: mobile_app
