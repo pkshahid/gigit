@@ -62,6 +62,10 @@ jobs:
         working-directory: mobile_app
         run: flutter pub get
 
+      - name: Regenerate Android platform files
+        working-directory: mobile_app
+        run: flutter create --platforms=android .
+
       - name: Build release APK
         working-directory: mobile_app
         run: flutter build apk --release
