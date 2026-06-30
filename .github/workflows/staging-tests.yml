@@ -87,3 +87,6 @@ jobs:
 
       - name: Run Flutter tests
         run: flutter test
+
+      - name: Build release APK
+        run: flutter build apk --release
