@@ -82,6 +82,9 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
+      - name: Regenerate Android platform files
+        run: flutter create --platforms=android .
+
       - name: Run Flutter tests
         run: flutter test
 
