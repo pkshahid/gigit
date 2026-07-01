@@ -176,7 +176,7 @@ func (h *apiHandler) createApplication(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := h.db.Exec(
-		`INSERT INTO applications (user_id, company, position, job_description, job_post_source, applied_sources, skills, resume_name, resume_type, resume_sent, status, applied_date, notes, retry_gap_days, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+		`INSERT INTO applications (user_id, company, position, job_description, job_post_source, applied_sources, skills, resume_name, resume_type, resume_sent, status, applied_date, notes, retry_gap_days, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 		user.ID, a.Company, a.Position, a.JobDescription, a.JobPostSource, a.AppliedSources, a.Skills, a.ResumeName, a.ResumeType, resumeSent, a.Status, a.AppliedDate, a.Notes, a.RetryGapDays, nowUTC(), nowUTC(),
 	)
 	if err != nil {
